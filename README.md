@@ -1,5 +1,6 @@
 # QGroundControl Ground Control Station
-
+添加天地图,参考[QGC使用国内天地图卫星图并添加注记图层](https://blog.csdn.net/qq_44788792/article/details/123900693)
+感谢!!!
 [![Releases](https://img.shields.io/github/release/mavlink/QGroundControl.svg)](https://github.com/mavlink/QGroundControl/releases)
 
 *QGroundControl* (QGC) is an intuitive and powerful ground control station (GCS) for UAVs.
