@@ -135,3 +135,58 @@ QString VWorldSatMapProvider::_getURL(const int x, const int y, const int zoom, 
             .arg(_getServerNum(x, y, 4)).arg(key, _versionBingMaps, _language);
     }
 }
+
+QString TiandituKeyList[]=
+{
+	"f05a757b5d74bf9c5a777d529c1a29ed",
+	"190a6428dc242e413d942f4748922e7f",
+	"1b0f66aada83d3664038db4a58a0c6e1",
+	"2c36de5966813f371c4041bc7b1b058b",
+	"75f0434f240669f4a2df6359275146d2",
+};
+
+QString TiandituGetKey(void)
+{
+	static int index = 0;
+	if(index>=4)
+	{
+		index = 0;
+	}
+    return TiandituKeyList[index++];
+}
+
+QString TiandituLabelMapProvider::_getURL(const int x, const int y, const int zoom, QNetworkAccessManager* networkManager) {
+    Q_UNUSED(networkManager)
+    static int server_select = 0;
+    if(server_select>7)
+    {
+        server_select=0;
+    }
+    //最后的QStringLiteral是自己申请的天地图网页版密钥
+    return QStringLiteral("http://t%1.tianditu.gov.cn/cia_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cia&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX=%2&TILEROW=%3&TILECOL=%4&tk=%5").arg(server_select++).arg(zoom).arg(y).arg(x).arg(TiandituGetKey());
+}
+
+QString TiandituSatMapProvider::_getURL(const int x, const int y, const int zoom, QNetworkAccessManager* networkManager) {
+    Q_UNUSED(networkManager)
+    static int server_select = 0;
+    if(server_select>7)
+    {
+        server_select=0;
+    }
+    return QStringLiteral("http://t%1.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX=%2&TILEROW=%3&TILECOL=%4&tk=%5").arg(server_select++).arg(zoom).arg(y).arg(x).arg(TiandituGetKey());
+
+}
+
+
+//https://t2.tianditu.gov.cn/ter_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ter&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILECOL=835&TILEROW=442&TILEMATRIX=10&tk=75f0434f240669f4a2df6359275146d2
+
+QString TianDiTerrainMapProvider::_getURL(const int x, const int y, const int zoom, QNetworkAccessManager* networkManager) {
+    Q_UNUSED(networkManager)
+    static int server_select = 0;
+    if(server_select>7)
+    {
+        server_select=0;
+    }
+    return QStringLiteral("http://t%1.tianditu.gov.cn/ter_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ter&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX=%2&TILEROW=%3&TILECOL=%4&tk=%5").arg(server_select++).arg(zoom).arg(y).arg(x).arg(TiandituGetKey());
+
+}

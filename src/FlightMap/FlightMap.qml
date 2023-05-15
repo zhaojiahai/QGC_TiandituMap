@@ -142,4 +142,51 @@ Map {
             }
         }
     }
+	
+	//@HackOS: tianditu
+	Map {
+        anchors.fill: parent
+        plugin: Plugin {
+            name: "QGroundControl"
+//            PluginParameter {
+//                name: "mapProvider"
+//                value: "tiandituImg"
+//            }
+//            PluginParameter {
+//                name: "format"
+//                value: "png"
+//            }
+        }
+        gesture.enabled: false
+        center: parent.center
+        color: 'transparent' // Necessary to make this map transparent
+        minimumFieldOfView: parent.minimumFieldOfView
+        maximumFieldOfView: parent.maximumFieldOfView
+        minimumTilt: parent.minimumTilt
+        maximumTilt: parent.maximumTilt
+        minimumZoomLevel: parent.minimumZoomLevel
+        maximumZoomLevel: parent.maximumZoomLevel
+        zoomLevel: parent.zoomLevel
+        tilt: parent.tilt;
+        bearing: parent.bearing
+        fieldOfView: parent.fieldOfView
+        z: parent.z + 1;
+
+        Component.onCompleted: {
+            updateActiveMapTypeText(this,"TianDiTu Label");
+        }
+    }
+	
+
+	
+	//@HackOS: tianditu
+	function updateActiveMapTypeText(control,para) {
+        for (var i = 0; i < control.supportedMapTypes.length; i++) {
+            if (para === control.supportedMapTypes[i].name) {
+                control.activeMapType = control.supportedMapTypes[i]
+                return
+            }
+        }
+    }
+	
 } // Map

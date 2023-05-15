@@ -86,6 +86,13 @@ UrlFactory::UrlFactory() : _timeout(5 * 1000) {
     _providersTable["LINZ Basemap"] = new LINZBasemapMapProvider(this);
     
     _providersTable["CustomURL Custom"] = new CustomURLMapProvider(this);
+
+    //@HackOS: register Tianditu
+    _providersTable["TianDiTu Satellite"] = new TiandituSatMapProvider(this);
+    _providersTable["TianDiTu Label"] = new TiandituLabelMapProvider(this);
+	_providersTable["TianDiTu Terrain"] = new TianDiTerrainMapProvider(this);
+	
+
 }
 
 void UrlFactory::registerProvider(QString name, MapProvider* provider) {

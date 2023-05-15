@@ -155,3 +155,44 @@ class VWorldSatMapProvider : public MapProvider {
   private:
     const QString _versionBingMaps = QStringLiteral("563");
 };
+
+//@HackOS: Tianditu
+//Tianditu Label Map
+class TiandituLabelMapProvider : public MapProvider {
+    Q_OBJECT
+  public:
+    TiandituLabelMapProvider(QObject* parent = nullptr)
+        : MapProvider(QStringLiteral("www.tiandi.com"), QStringLiteral("jpg"),
+                      AVERAGE_TILE_SIZE, QGeoMapType::SatelliteMapDay, parent) {}
+
+    QString _getURL(const int x, const int y, const int zoom, QNetworkAccessManager* networkManager) override;
+
+  private:
+    const QString _versionBingMaps = QStringLiteral("563");
+};
+
+//Tianditu Satellite Map
+class TiandituSatMapProvider : public MapProvider {
+    Q_OBJECT
+  public:
+    TiandituSatMapProvider(QObject* parent = nullptr)
+        : MapProvider(QStringLiteral("www.tiandi.com"), QStringLiteral("jpg"),
+                      AVERAGE_TILE_SIZE, QGeoMapType::SatelliteMapDay, parent) {}
+    QString _getURL(const int x, const int y, const int zoom, QNetworkAccessManager* networkManager) override;
+
+  private:
+    const QString _versionBingMaps = QStringLiteral("563");
+};
+
+//Tianditu Terrain Map
+class TianDiTerrainMapProvider : public MapProvider {
+    Q_OBJECT
+  public:
+    TianDiTerrainMapProvider(QObject* parent = nullptr)
+        : MapProvider(QStringLiteral("www.tiandi.com"), QStringLiteral("jpg"),
+                      AVERAGE_TILE_SIZE, QGeoMapType::SatelliteMapDay, parent) {}
+    QString _getURL(const int x, const int y, const int zoom, QNetworkAccessManager* networkManager) override;
+
+  private:
+    const QString _versionBingMaps = QStringLiteral("563");
+};
